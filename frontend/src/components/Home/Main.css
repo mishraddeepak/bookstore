@@ -1,0 +1,34 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 80px;
+    margin-top: 90px;
+  }
+  
+  .child {
+    flex: 1 1 calc(50%); /* Allows the children to take up 50% of the width each on larger screens */
+  
+    text-align: center;
+  }
+  
+  .child-1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+  }
+  .child-1 img{
+      width: 100%;
+  }
+  
+  .child-2 {
+  }
+  
+  @media (max-width: 600px) {
+    .child {
+      flex: 1 1 calc(100%); /* Each child takes up 100% of the container's width minus margin */
+    }
+  }
+  
