@@ -1,0 +1,19 @@
+name: Sync to GitLab
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Mirror to GitLab
+        run: |
+          git push --mirror https://mishraddeepak:${{ secrets.GITLAB_TOKEN }}@://gitlab.com
