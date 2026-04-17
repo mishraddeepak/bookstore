@@ -30,7 +30,7 @@ jobs:
         run: |
           echo "🚀 Starting GitLab sync..."
 
-          REPO_URL="https://mishraddeepak:${G_TOKEN}@gitlab.com/mishraddeepak/YOUR_REPO.git"
+          REPO_URL="https://mishraddeepak:${G_TOKEN}@gitlab.com/mishraddeepak/ddeepakmishra5-group/ddeepakmishra5-project.git"
 
           echo "📌 Target repo:"
           echo "$REPO_URL" | sed 's/:.*@/:****@/'   # mask token
