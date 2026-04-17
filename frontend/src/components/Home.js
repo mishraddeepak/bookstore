@@ -9,7 +9,7 @@ function Home() {
   return (
     <>
       <Header/>
-      
+      // home
       <Main/>
       <Free/>
       <Footer/>
