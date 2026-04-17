@@ -35,20 +35,18 @@ jobs:
           set -e
           set -x
 
-          echo "🚀 Starting GitLab sync..."
-
           REPO_URL="https://mishraddeepak:${G_TOKEN}@gitlab.com/ddeepakmishra5-group/ddeepakmishra5-project.git"
-
-          echo "📌 Target repo:"
-          echo "$REPO_URL" | sed 's/:.*@/:****@/'
 
           git remote remove gitlab || true
           git remote add gitlab "$REPO_URL"
 
-          git remote -v   # debug
+          git remote -v
 
-          echo "📡 Pushing mirror..."
-          git push --mirror gitlab
+          echo "📡 Pushing branches..."
+          git push gitlab --all
+
+          echo "🏷️ Pushing tags..."
+          git push gitlab --tags
 
           echo "✅ Sync completed"
         env:
