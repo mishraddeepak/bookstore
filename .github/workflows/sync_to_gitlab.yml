@@ -3,7 +3,7 @@ name: Sync to GitLab
 on:
   push:
     branches:
-      - main   # change if needed
+      - main
 
 jobs:
   sync:
@@ -13,30 +13,38 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0   # required for mirror
-
+          fetch-depth: 0
 
       - name: Debug environment
         run: |
-          echo "🔍 Checking variables....@@@@@..."
+          echo "🔍 Checking variables..."
 
           if [ -z "$G_TOKEN" ]; then
             echo "❌ G_TOKEN is EMPTY"
+            exit 1
           else
             echo "✅ G_TOKEN is present"
             echo "🔑 Token length: ${#G_TOKEN}"
           fi
+        env:
+          G_TOKEN: ${{ secrets.G_TOKEN }}
 
       - name: Mirror to GitLab
         run: |
+          set -e
+          set -x
+
           echo "🚀 Starting GitLab sync..."
 
           REPO_URL="https://mishraddeepak:${G_TOKEN}@gitlab.com/mishraddeepak/ddeepakmishra5-group/ddeepakmishra5-project.git"
 
           echo "📌 Target repo:"
-          echo "$REPO_URL" | sed 's/:.*@/:****@/'   # mask token
+          echo "$REPO_URL" | sed 's/:.*@/:****@/'
 
-          git remote add gitlab "$REPO_URL" || git remote set-url gitlab "$REPO_URL"
+          git remote remove gitlab || true
+          git remote add gitlab "$REPO_URL"
+
+          git remote -v   # debug
 
           echo "📡 Pushing mirror..."
           git push --mirror gitlab
