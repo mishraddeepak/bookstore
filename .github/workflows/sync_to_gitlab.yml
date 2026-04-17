@@ -18,7 +18,7 @@ jobs:
 
       - name: Debug environment
         run: |
-          echo "🔍 Checking variables......."
+          echo "🔍 Checking variables....@@@@@..."
 
           if [ -z "$G_TOKEN" ]; then
             echo "❌ G_TOKEN is EMPTY"
