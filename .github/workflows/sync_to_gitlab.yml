@@ -15,5 +15,7 @@ jobs:
           fetch-depth: 0
 
       - name: Mirror to GitLab
+        env:
+          G_TOKEN: ${{ secrets.GITLAB_TOKEN }}
         run: |
-          git push --mirror https://mishraddeepak:${{ secrets.GITLAB_TOKEN }}@://gitlab.com
+          git push --mirror https://mishraddeepak:${G_TOKEN}@://gitlab.com
